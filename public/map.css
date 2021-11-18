@@ -9,9 +9,18 @@ body {
 
 
 div#sky {
+  position: relative;
   background: linear-gradient(#7af,#def);
   width: 100%;
   min-height: 80px;
+}
+
+div#title {
+  position: absolute;
+  font-size: 20pt;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
 }
 
 div#ground {
@@ -80,4 +89,43 @@ div#overlay {
   top: 0;
   background: linear-gradient(white,30px,transparent);
   transform: translateZ(0px);
+}
+
+#dialogUnderlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: #000;
+    opacity: 0.2;
+  }
+  .dialog {
+    padding: 1em;
+    z-index: 20;
+    background-color: #fff;
+    border: 2px solid #008800;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    max-width: 1000px;
+  }
+
+div.button {
+  border: 1px solid black;
+  background-color: #eee;
+  font-size: 20pt;
+  padding: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+div.button:last-child {
+  margin-bottom: 0;
+}
+div.button:hover {
+  cursor: pointer;
+}
+div.button.disabled:hover {
+  cursor: auto;
 }

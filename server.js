@@ -13,6 +13,8 @@ const fastify = require("fastify")({
 
 // ADD FAVORITES ARRAY VARIABLE FROM TODO HERE
 
+const buildmethodlist = require("./src/buildmethodlist.js");
+//buildmethodlist();
 
 // Setup our static files
 fastify.register(require("fastify-static"), {

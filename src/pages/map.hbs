@@ -45,7 +45,12 @@
           <option value="0" selected>none</option>
         </select>
         <label for="drive"><input id="drive" type="checkbox" disabled />I'll drive</label>
-        
+        <button id="menu" type="button">
+          Menu
+        </button>
+        <div id="title">
+          
+        </div>
       </div>
       <div id="ground">
         
@@ -115,12 +120,70 @@
           
         </div>
       </div>
-    
-      
+    <div id="dialogUnderlay"></div>
+    <div id="startdialog" class="dialog">
+      <div class="button" id="demo">
+        Demo
+      </div>
+      <div class="button disabled" id="lessons">
+        Lessons
+      </div>
+      <div class="button" id="random">
+        Random method
+      </div>
+      <div class="button disabled" id="choose">
+        Choose method
+      </div>
+    </div>
+    <div id="demodialog" class="dialog">
+      <p>
+        This app takes change ringing method diagrams like the one below and displays them as criss-crossing paths along which the bells travel.
+      </p>
+      <svg class="grid" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="118" height="620">
+        <g style="font-family: Verdana, sans-serif; fill: #000; font-size: 16px;">
+          <text x="40" y="16">1</text><text x="56" y="16">2</text><text x="72" y="16">3</text><text x="88" y="16">4</text><text x="104" y="16">5</text><text x="40" y="36">2</text><text x="56" y="36">1</text><text x="72" y="36">3</text><text x="88" y="36">5</text><text x="104" y="36">4</text><text x="40" y="56">2</text><text x="56" y="56">3</text><text x="72" y="56">1</text><text x="88" y="56">4</text><text x="104" y="56">5</text><text x="40" y="76">3</text><text x="56" y="76">2</text><text x="72" y="76">4</text><text x="88" y="76">1</text><text x="104" y="76">5</text><text x="40" y="96">3</text><text x="56" y="96">4</text><text x="72" y="96">2</text><text x="88" y="96">5</text><text x="104" y="96">1</text><text x="40" y="116">4</text><text x="56" y="116">3</text><text x="72" y="116">5</text><text x="88" y="116">2</text><text x="104" y="116">1</text><text x="40" y="136">4</text><text x="56" y="136">5</text><text x="72" y="136">3</text><text x="88" y="136">1</text><text x="104" y="136">2</text><text x="40" y="156">5</text><text x="56" y="156">4</text><text x="72" y="156">1</text><text x="88" y="156">3</text><text x="104" y="156">2</text><text x="40" y="176">5</text><text x="56" y="176">1</text><text x="72" y="176">4</text><text x="88" y="176">2</text><text x="104" y="176">3</text><text x="40" y="196">1</text><text x="56" y="196">5</text><text x="72" y="196">2</text><text x="88" y="196">4</text><text x="104" y="196">3</text><text x="40" y="216">1</text><text x="56" y="216">2</text><text x="72" y="216">5</text><text x="88" y="216">3</text><text x="104" y="216">4</text><text x="40" y="236">2</text><text x="56" y="236">1</text><text x="72" y="236">5</text><text x="88" y="236">4</text><text x="104" y="236">3</text><text x="40" y="256">2</text><text x="56" y="256">5</text><text x="72" y="256">1</text><text x="88" y="256">3</text><text x="104" y="256">4</text><text x="40" y="276">5</text><text x="56" y="276">2</text><text x="72" y="276">3</text><text x="88" y="276">1</text><text x="104" y="276">4</text><text x="40" y="296">5</text><text x="56" y="296">3</text><text x="72" y="296">2</text><text x="88" y="296">4</text><text x="104" y="296">1</text><text x="40" y="316">3</text><text x="56" y="316">5</text><text x="72" y="316">4</text><text x="88" y="316">2</text><text x="104" y="316">1</text><text x="40" y="336">3</text><text x="56" y="336">4</text><text x="72" y="336">5</text><text x="88" y="336">1</text><text x="104" y="336">2</text><text x="40" y="356">4</text><text x="56" y="356">3</text><text x="72" y="356">1</text><text x="88" y="356">5</text><text x="104" y="356">2</text><text x="40" y="376">4</text><text x="56" y="376">1</text><text x="72" y="376">3</text><text x="88" y="376">2</text><text x="104" y="376">5</text><text x="40" y="396">1</text><text x="56" y="396">4</text><text x="72" y="396">2</text><text x="88" y="396">3</text><text x="104" y="396">5</text><text x="40" y="416">1</text><text x="56" y="416">2</text><text x="72" y="416">4</text><text x="88" y="416">5</text><text x="104" y="416">3</text><text x="40" y="436">2</text><text x="56" y="436">1</text><text x="72" y="436">4</text><text x="88" y="436">3</text><text x="104" y="436">5</text><text x="40" y="456">2</text><text x="56" y="456">4</text><text x="72" y="456">1</text><text x="88" y="456">5</text><text x="104" y="456">3</text><text x="40" y="476">4</text><text x="56" y="476">2</text><text x="72" y="476">5</text><text x="88" y="476">1</text><text x="104" y="476">3</text><text x="40" y="496">4</text><text x="56" y="496">5</text><text x="72" y="496">2</text><text x="88" y="496">3</text><text x="104" y="496">1</text><text x="40" y="516">5</text><text x="56" y="516">4</text><text x="72" y="516">3</text><text x="88" y="516">2</text><text x="104" y="516">1</text><text x="40" y="536">5</text><text x="56" y="536">3</text><text x="72" y="536">4</text><text x="88" y="536">1</text><text x="104" y="536">2</text><text x="40" y="556">3</text><text x="56" y="556">5</text><text x="72" y="556">1</text><text x="88" y="556">4</text><text x="104" y="556">2</text><text x="40" y="576">3</text><text x="56" y="576">1</text><text x="72" y="576">5</text><text x="88" y="576">2</text><text x="104" y="576">4</text><text x="40" y="596">1</text><text x="56" y="596">3</text><text x="72" y="596">2</text><text x="88" y="596">5</text><text x="104" y="596">4</text><text x="40" y="616">1</text><text x="56" y="616">2</text><text x="72" y="616">3</text><text x="88" y="616">4</text><text x="104" y="616">5</text>
+        </g>
+        <g style="stroke: #111; stroke-width:1;">
+          <line x1="38" y1="20" x2="118" y2="20"></line><line x1="38" y1="200" x2="118" y2="200"></line><line x1="38" y1="400" x2="118" y2="400"></line><line x1="38" y1="600" x2="118" y2="600"></line>
+        </g>
+        <g style="font-family: Verdana; fill: #000;"></g>
+        <g style="stroke: red; stroke-width: 1; fill:none;">
+          <path d="M45,10l16,20l16,20l16,20l16,20l0,20l-16,20l-16,20l-16,20l-16,20l0,20l16,20l16,20l16,20l16,20l0,20l-16,20l-16,20l-16,20l-16,20l0,20l16,20l16,20l16,20l16,20l0,20l-16,20l-16,20l-16,20l-16,20l0,20"></path>
+</g>
+        <g style="stroke: red; stroke-width: 1; fill:none;">
+          <path d="M61,10l-16,20l0,20l16,20l16,20l16,20l16,20l0,20l-16,20l-16,20l-16,20l-16,20l0,20l16,20l16,20l16,20l16,20l0,20l-16,20l-16,20l-16,20l-16,20l0,20l16,20l16,20l16,20l16,20l0,20l-16,20l-16,20l-16,20"></path>
+</g>
+        <g style="stroke: blue; stroke-width: 2; fill:none;">
+          <path d="M77,10l0,20l-16,20l-16,20l0,20l16,20l16,20l16,20l16,20l0,20l-16,20l16,20l-16,20l-16,20l-16,20l-16,20l0,20l16,20l16,20l16,20l16,20l-16,20l16,20l0,20l-16,20l-16,20l-16,20l-16,20l0,20l16,20l16,20"></path>
+</g>
+        <g style="stroke: blue; stroke-width: 2; fill:none;">
+          <path d="M93,10l16,20l-16,20l-16,20l-16,20l-16,20l0,20l16,20l16,20l16,20l16,20l-16,20l16,20l0,20l-16,20l-16,20l-16,20l-16,20l0,20l16,20l16,20l0,20l-16,20l-16,20l0,20l16,20l16,20l16,20l16,20l0,20l-16,20"></path>
+  </g>
+        <g style="stroke: blue; stroke-width: 2; fill:none;">
+          <path d="M109,10l-16,20l16,20l0,20l-16,20l-16,20l-16,20l-16,20l0,20l16,20l16,20l0,20l-16,20l-16,20l0,20l16,20l16,20l16,20l16,20l0,20l-16,20l16,20l-16,20l-16,20l-16,20l-16,20l0,20l16,20l16,20l16,20l16,20"></path>
+        </g>
+      </svg>
+      <p>
+        Looking "down" at this diagram from above, the bells begin in order left to right, but if you imagine yourself sitting on that first row of numbers looking ahead at the path to follow, bell 1 will be to your right and bell 5 on the left.
+      </p>
+      <p>
+        There is one additional tweak to the bell diagrams here—each row is slanted a bit downward or "forward" because the bells do not all reach the same row at the same time.
+      </p>
+      <p>
+        Clicking "Go" will start the bells/ghosts/gravestones moving steadily forward along their paths. Each bell will sound every time it crosses one of the horizontal black lines on its path.
+      </p>
+      <p>
+        If you've chosen a bell, your perspective will be from "behind" that bell instead of remaining centered on the whole set. If you check "I'll drive" you are responsible for steering your bell left and right to stay on its path! (The bell will continue to move forward on its own.) Steering can be done by clicking the arrows on the screen or using the left and right arrow keys on your keyboard.
+      </p>
+      <button id="trydemo" type="button">
+        Try it out
+      </button>
+    </div>
     
         
       <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="jquery.svg.js"></script>
+    <script src="jquery.centre.js"></script>
     <script src="jquery.svganim.js"></script>
     <script src="jquery.svgdom.js"></script>
     <script src="map.js"></script> 
