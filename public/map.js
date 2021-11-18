@@ -1,5 +1,5 @@
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-const freqs = [450, 400, 375, 333.33333, 300];
+const freqs = [500, 450, 400, 375, 333.33333, 300];
 var svg;
 var rowArr = [[1,2,3],[1,2,3],[2,1,3],[2,3,1],[3,2,1],[3,1,2],[1,3,2],[1,2,3]];
 var rownum = 0;
@@ -21,7 +21,7 @@ var speedbump = 0;
 var playing = false;
 var stop = false;
 var atend;
-const methods = [
+var methods = [
   {title: "Stedman Doubles",
   stage: 5,
   pn: [[3],[1],[5],[3],[1],[3],[1],[3],[5],[1],[3],[1]]},
@@ -30,12 +30,49 @@ const methods = [
   pn: ["x",[1,4],"x",[1,4],"x",[1,4],"x",[1,2]],
   huntbells: [1]}
 ];
+var method;
+
+$('div.dialog').hide();
+$("#startdialog").centre().show();
 
 $(function() {
   proportions();
   $("#viewbox").svg({onLoad: (o) => svg = o});
   
-  changemethod(methods[1]);
+  getmethods();
+  
+  $("div.button").on("click", function() {
+    //console.log(this.id);
+    switch (this.id) {
+      case "demo":
+        // explain how this works
+        $("#startdialog").hide();
+        $("#demodialog").centre().show();
+        break;
+      case "lessons":
+        // lesson options
+        break;
+      case "random":
+        // pick a random method and go!
+        changemethod(methods[Math.floor(Math.random()*methods.length)]);
+        $("#dialogUnderlay,div.dialog").hide();
+        break;
+      case "choose":
+        // choose method by title
+        break;
+    }
+  });
+  
+  $("#trydemo").on("click", function() {
+    changemethod(methods.find(o => o.title === "Grandsire Doubles"));
+    $("#dialogUnderlay,div.dialog").hide();
+  });
+  
+  $("#menu").on("click", function() {
+    $("#dialogUnderlay").show();
+    $("#startdialog").centre().show();
+  });
+  
   
   $("#mybell").on("change", function() {
     let val = Number($("#mybell option:checked").val());
@@ -46,7 +83,7 @@ $(function() {
       }
       $("#drive").prop("disabled", true);
       mybell = 0;
-      changemethod(methods[1]);
+      changemethod(method);
     } else {
       $("#drive").prop("disabled", false);
       let ground = Number($("#ground").css("width").slice(0,-2));
@@ -68,6 +105,7 @@ $(function() {
       */
       mybell = val;
       currentpos = mybell;
+      currentseg = {row: 0, target: mybell-1, slope: 0};
     }
     $("path.odd.bell"+mybell).css("fill", "blue");
     $("path.even.bell"+mybell).css("fill", "darkblue");
@@ -123,8 +161,15 @@ $(function() {
 
 function keysteer(e) {
   if ([37,39].includes(e.which) && !clicked) {
-          steer(e.which === 37 ? "leftarrow" : "rightarrow");
-        }
+    steer(e.which === 37 ? "leftarrow" : "rightarrow");
+  }
+}
+
+function getmethods(n) {
+  $.get("methods.json", function(data) {
+    methods = data;
+    if (n > -1 && n < methods.length) changemethod(methods[n]);
+  });
 }
 
 function proportions() {
@@ -189,7 +234,7 @@ function strike() {
       if (bell !== mybell) {
         playbell(bell, audioCtx.currentTime+(gap ? 0.7 : 0.3));
       }
-      if (currentpos === place+1) {
+      if (currentpos === place+1 && currentseg.row <= rownum) {
         playbell(mybell, audioCtx.currentTime+(gap ? 0.7 : 0.3));
       }
       
@@ -237,6 +282,8 @@ function reset() {
 }
 
 function changemethod(obj) {
+  method = obj;
+  $("#title").text(obj.title);
   numbells = obj.stage;
   gutter = 600/numbells;
   rowArr = buildrows(obj.pn,obj.stage);
@@ -253,7 +300,10 @@ function changemethod(obj) {
     addbell(b);
   }
   addbumps();
-  //leadends(8,"pink");
+  obj.huntbells.forEach(b => {
+    $("path.bell"+b).css("fill", "#a00");
+    $("#bell"+b+" path").css("fill", "pink");
+  });
 }
 
 function steer(arrow) {
