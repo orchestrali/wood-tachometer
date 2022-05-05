@@ -37,10 +37,10 @@ $(function() {
   }});
   
   //changemethod(methods[1]);
-  addbumps();
+  //addbumps();
   for (let b = 1; b <= numbells; b++) {
     svg.path($("#placelines"), buildpath(b));
-    addbell(b);
+    //addbell(b);
   }
   //svg.path($("#placelines"), buildpath(3));
   //buildcoords();
@@ -449,37 +449,37 @@ function bellpos(b) {
 
 
 function buildpath(b) {
-  let arr = [["v",-50*(numbells+1)-50*(b-1)]];
+  let arr = [["v",50*(numbells+1)+50*(b-1)]];
   let rn = 2;
   
   let p = b-1;
   while (rn < rowArr.length) {
     let place = rowArr[rn].indexOf(b);
     let diff = place - p;
-    let gap = rn%2 === 0 ? -50 : 0;
+    let gap = rn%2 === 0 ? 50 : 0;
     let a;
     let angle, extra;
     switch (diff) {
       case 0:
         if (arr[arr.length-1][0] === "v" && arr[arr.length-1].length === 2) {
-          arr[arr.length-1][1] -= 50*numbells - gap;
+          arr[arr.length-1][1] += 50*numbells + gap;
         } else {
-          a = ["v", -50*numbells + gap];
+          a = ["v", 50*numbells + gap];
           arr.push(a);
         }
         break;
       case 1: case -1:
-        angle = Math.atan(gutter/(50*(numbells+diff)-gap))/2;
+        angle = Math.atan(gutter/(50*(numbells+diff)+gap))/2;
         extra = 70*Math.tan(angle);
-        let v = ["v",-extra];
-        a = ["l", -diff*gutter, -50*(numbells+diff) + gap + extra];
-        diff === 1 ? arr.push(a.concat(v)) : arr.push(v.concat(a));
+        let v = ["v",extra];
+        a = ["l", diff*gutter, 50*(numbells+diff) + gap - extra];
+        diff === -1 ? arr.push(a.concat(v)) : arr.push(v.concat(a));
         break;
     }
     p = place;
     rn++;
   }
-  arr.push(["v",-1000]);
+  arr.push(["v",1000]);
   let rev = [];
   arr.forEach(a => {
     let alt = [a[0]];
@@ -494,7 +494,7 @@ function buildpath(b) {
   });
   arr.push(["h",70]);
   let bigarr = arr.concat(rev).map(a => a.join(" "));
-  let offset = (numbells+1)/2 -b;
+  let offset = b-(numbells+1)/2;
   let left = offset*gutter+465;
-  return "M "+left+" 600 "+bigarr.join(" ");
+  return "M "+left+" 0 "+bigarr.join(" ");
 }
