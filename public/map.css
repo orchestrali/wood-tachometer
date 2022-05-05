@@ -7,6 +7,10 @@ body {
   margin: 0;
 }
 
+ul {
+  list-style-type: none;
+}
+
 
 div#sky {
   position: relative;
@@ -24,7 +28,7 @@ div#title {
 }
 
 div#ground {
-  -webkit-perspective: 1200px;
+  -webkit-perspective: 1320px;
 	-webkit-perspective-origin: 50% -65%;
   overflow: hidden;
   position: relative;
@@ -70,6 +74,11 @@ svg#bellbox {
   opacity: 0.7;
 }
 
+#buttoncontainer {
+  position: absolute;
+  bottom: 105px;
+}
+
 #buttoncontainer button {
   font-size: 40pt;
   bottom: 0;
@@ -111,6 +120,42 @@ div#overlay {
     border-radius: 4px;
     max-width: 1000px;
   }
+
+#choosedialog {
+  height: 600px;
+  min-width: 300px;
+}
+
+#choosedialog div {
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+
+#methodtitle {
+  width: 99%;
+}
+
+#methodlist {
+  margin-left: 1px;
+  padding-left: 0;
+  width: 98.5%;
+  position: absolute;
+  top: 6px;
+  background-color: aliceblue;
+}
+#methodlist li {
+  display: none;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: aliceblue;
+}
+#methodlist li:hover, #methodlist li.selected {
+  background-color: lightsteelblue;
+}
 
 div.button {
   border: 1px solid black;

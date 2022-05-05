@@ -31,6 +31,9 @@ var methods = [
   huntbells: [1]}
 ];
 var method;
+var methodlist = [];
+var searchvalue = "";
+var matchmethods = [];
 
 $('div.dialog').hide();
 $("#startdialog").centre().show();
@@ -58,17 +61,40 @@ $(function() {
         $("#dialogUnderlay,div.dialog").hide();
         break;
       case "choose":
+        
         // choose method by title
+        $("#startdialog").hide();
+        $("#choosedialog").centre().show();
         break;
     }
   });
+  
+  $("#methodtitle").on("click", methodsearch);
+  $("#methodtitle").on("keyup", methodsearch);
+  $("#methodlist").on("click", "li", (e) => {
+    $("#methodtitle").val($(e.currentTarget).text());
+    $("#methodlist li").hide();
+    $("#choosemethod").removeClass("disabled");
+    e.stopPropagation();
+  });
+  $("#choosemethod").on("click", () => {
+    if (!$("#choosemethod").hasClass("disabled")) {
+      let m = methods.find(o => o.title === $("#methodtitle").val());
+      if (m) {
+        changemethod(m);
+        $("#dialogUnderlay,div.dialog").hide();
+      }
+      
+    }
+  })
   
   $("#trydemo").on("click", function() {
     changemethod(methods.find(o => o.title === "Grandsire Doubles"));
     $("#dialogUnderlay,div.dialog").hide();
   });
   
-  $("#menu").on("click", function() {
+  $(".menu").on("click", function() {
+    $('div.dialog').hide();
     $("#dialogUnderlay").show();
     $("#startdialog").centre().show();
   });
@@ -168,14 +194,15 @@ function keysteer(e) {
 function getmethods(n) {
   $.get("methods.json", function(data) {
     methods = data;
+    console.log(methods.length);
     if (n > -1 && n < methods.length) changemethod(methods[n]);
   });
 }
 
 function proportions() {
-  let frame = $('iframe[src="https://wood-creative-tachometer.glitch.me"]');
+  console.log(window.innerWidth);
   let ground = Number($("#ground").css("width").slice(0,-2));
-  
+  console.log(ground);
   let left;
   if (ground > 1000) {
     left = (ground-1000)/2;
@@ -192,6 +219,67 @@ function proportions() {
   $("#bellbox").css("left", left+"px");
   leftstart = left;
   
+}
+
+function methodsearch(e) {
+  
+  $(document.body).on("click.menuHide", () => {
+    $("#methodlist li").hide();
+    $(this).off("click.menuHide");
+  });
+  
+  let value = $(this).val().toLowerCase();
+  //console.log(value);
+  
+  if (/^[^\s]/.test(value)) {
+    if (searchvalue.length && value.slice(0,-1) === searchvalue) {
+      let i = 0;
+      do {
+        if (methodlist[i].toLowerCase().indexOf(value) === -1) {
+          $("#methodlist li:nth-child("+(i+1)+")").remove();
+          methodlist.splice(i,1);
+        } else {
+          i++;
+        }
+      } while (i < methodlist.length);
+      
+      matchmethods = matchmethods.filter(m => m.toLowerCase().includes(value));
+    } else if (searchvalue.length && searchvalue.slice(0,-1) === value) {
+      for (let i = 0; i < methods.length; i++) {
+        if (methods[i].title.toLowerCase().includes(value) && !matchmethods.includes(methods[i].title) && !methodlist.includes(methods[i].title)) {
+          matchmethods.push(methods[i].title);
+        }
+      }
+    }else if (searchvalue.length === 0 || (value.length === 1 && searchvalue.length > 1)) {
+      $("#methodlist li").remove();
+      methodlist = [];
+      matchmethods = [];
+      for (let i = 0; i < methods.length; i++) {
+        if (methods[i].title.toLowerCase().includes(value)) {
+          matchmethods.push(methods[i].title);
+        }
+      }
+    }
+    if (methodlist.length < 16 && matchmethods.length) {
+      let i = methodlist.length;
+      do {
+        let j = Math.floor(Math.random() * matchmethods.length);
+        methodlist.push(matchmethods[j]);
+        $("#methodlist").append("<li>"+matchmethods[j]+"</li>");
+        matchmethods.splice(j,1);
+        i++;
+      } while (matchmethods.length && i <= 16);
+    }
+    $("#methodlist li").show();
+    if (methodlist.length > 1 && !$("#choosemethod").hasClass("disabled")) $("#choosemethod").addClass("disabled");
+    searchvalue = value;
+    
+  } else if (value.length === 0) {
+    $("#methodlist li").remove();
+    searchvalue = "";
+    methodlist = [];
+    matchmethods = [];
+  }
 }
 
 function strike() {

@@ -16,8 +16,7 @@ div#sky {
 }
 
 div#ground {
-  -webkit-perspective: 1200px;
-	-webkit-perspective-origin: 50% -60%;
+  
   overflow: hidden;
   position: relative;
   //height: 85%;
@@ -43,12 +42,12 @@ button:hover {
   top: 0;
   left: 0px;
   transform-origin: left top;
-  transform: rotateX(90deg);
+  
 }
 
 #viewbox {
   position: absolute;
-  top: -940px;
+  top: 0px;
   left: 0;
   transition: transform .4s linear, left .4s linear;
 }
